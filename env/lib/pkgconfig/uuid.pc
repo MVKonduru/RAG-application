@@ -1,0 +1,11 @@
+prefix=/home/konduru.manasaveena/Desktop/llmops/env
+exec_prefix=/home/konduru.manasaveena/Desktop/llmops/env
+libdir=/home/konduru.manasaveena/Desktop/llmops/env/lib
+includedir=/home/konduru.manasaveena/Desktop/llmops/env/include
+
+Name: uuid
+Description: Universally unique id library
+Version: 2.32.1
+Requires:
+Cflags: -I${includedir}/uuid
+Libs: -L${libdir} -luuid

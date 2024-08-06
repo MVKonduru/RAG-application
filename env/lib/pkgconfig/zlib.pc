@@ -1,0 +1,13 @@
+prefix=/home/konduru.manasaveena/Desktop/llmops/env
+exec_prefix=/home/konduru.manasaveena/Desktop/llmops/env
+libdir=/home/konduru.manasaveena/Desktop/llmops/env/lib
+sharedlibdir=/home/konduru.manasaveena/Desktop/llmops/env/lib
+includedir=/home/konduru.manasaveena/Desktop/llmops/env/include
+
+Name: zlib
+Description: zlib compression library
+Version: 1.2.13
+
+Requires:
+Libs: -L${libdir} -L${sharedlibdir} -lz
+Cflags: -I${includedir}
