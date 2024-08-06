@@ -2,7 +2,7 @@ name: workflow
 on:
   push:
     branches:
-     - main
+      - main
     paths-ignore:
       - "README.md"
 permissions:
@@ -11,23 +11,24 @@ permissions:
 jobs:
   integration:
     name: Continuous Integration
-    runs-on: Ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v
+        uses: actions/checkout@v3
       - name: Lint code
         run: echo "Linting repository"
       - name: Run unit tests
         run: echo "running unit tests"
-build-and-push-ecr-image:
-  name: Continuous Delivery
-    needs: integration 
+
+  build-and-push-ecr-image:
+    name: Continuous Delivery
+    needs: integration
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Install utilities
-        run: /
+        run: |
           sudo apt-get update
           sudo apt-get install -y jq unzip
       - name: Configure AWS credentials
@@ -35,20 +36,14 @@ build-and-push-ecr-image:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region:${{ secrets.AWS_DEFAULT_REGION }}
+          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
-
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
         env:
           IMAGE_TAG: latest
-        run: /
-          # BUild a docker container and
-          # push it to ECR so that it can
-          # be deployed to ECS
-          docker buid -t ${{ secrets.AWS_ECR_REPO_URI }}:$IMAGE_TAG
+        run: |
+          docker build -t ${{ secrets.AWS_ECR_REPO_URI }}:$IMAGE_TAG .
           docker push ${{ secrets.AWS_ECR_REPO_URI }}:$IMAGE_TAG
-
-  
