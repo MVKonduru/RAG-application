@@ -63,7 +63,7 @@ if __name__ == '__main__':
     faiss_index = FAISS.load_local("faiss_index", bedrock_embeddings, allow_dangerous_deserialization=True)
     
     # Define the query
-    query = "Who are the new owners?"
+    query = "who is the target for the filthiest abuse?"
     
     # Initialize the LLM
     llm = get_llm()
